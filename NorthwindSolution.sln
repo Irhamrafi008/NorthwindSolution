@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{9A55F9F1-2F32-4EDD-AFE9-3D7A68CC8EDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Web", "Northwind.Web\Northwind.Web.csproj", "{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6A9004A-BC8A-4FD6-97CA-6F759B6ADEBD} = {9A55F9F1-2F32-4EDD-AFE9-3D7A68CC8EDE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9255521-2F57-4F6F-85ED-C2D5132C22BD}
+	EndGlobalSection
+EndGlobal
