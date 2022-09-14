@@ -1,12 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Northwind.Domain.Base;
+using Northwind.Persistence;
+using Northwind.Persistence.Base;
 using Northwind.Web.Repository;
+using NorthwindServices;
+using NorthwindServicesAbstraction;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +36,16 @@ namespace Northwind.Web
             services.AddControllersWithViews();
             //call interface & Implementation
             services.AddScoped<IEmployee, EmployeeRepository>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+            services.AddScoped<IServiceManager, ServicesManager>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            //register DB Context
+            services.AddDbContext<NorthwindContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration["ConnectionStrings:NorthwindDb"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +64,13 @@ namespace Northwind.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //set folder resouces to static file
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -55,6 +81,9 @@ namespace Northwind.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           // ShopeePopulateData.PopulateData(app);
+
         }
     }
 }
