@@ -2,7 +2,7 @@
 using Northwind.Contracts.Dto.Category;
 using Northwind.Domain.Models;
 
-namespace Northwind.Test.Maping
+namespace Northwind.Web.Mapping
 {
     public class MappingProfile : Profile
     {

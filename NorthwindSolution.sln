@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Persistence", "No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Contracts", "Northwind.Contracts\Northwind.Contracts.csproj", "{577C3854-C2CA-450F-B6E9-3CF87CD31D88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindServicesAbstraction", "NorthwindServicesAbstraction\NorthwindServicesAbstraction.csproj", "{2887585C-B383-4DED-A743-2C2531D90CCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindServicesAbstraction", "NorthwindServicesAbstraction\NorthwindServicesAbstraction.csproj", "{2887585C-B383-4DED-A743-2C2531D90CCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindServices", "NorthwindServices\NorthwindServices.csproj", "{4D017609-B534-49BD-8337-E560027BEF68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindServices", "NorthwindServices\NorthwindServices.csproj", "{4D017609-B534-49BD-8337-E560027BEF68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Test", "Northwind.Test\Northwind.Test.csproj", "{8E5DFE77-40F9-4A80-9184-96D0F7E025D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4D017609-B534-49BD-8337-E560027BEF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D017609-B534-49BD-8337-E560027BEF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D017609-B534-49BD-8337-E560027BEF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E5DFE77-40F9-4A80-9184-96D0F7E025D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5DFE77-40F9-4A80-9184-96D0F7E025D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5DFE77-40F9-4A80-9184-96D0F7E025D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5DFE77-40F9-4A80-9184-96D0F7E025D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{577C3854-C2CA-450F-B6E9-3CF87CD31D88} = {88EA70E3-7F53-4A00-83FD-F6B5DE668895}
 		{2887585C-B383-4DED-A743-2C2531D90CCE} = {88EA70E3-7F53-4A00-83FD-F6B5DE668895}
 		{4D017609-B534-49BD-8337-E560027BEF68} = {88EA70E3-7F53-4A00-83FD-F6B5DE668895}
+		{8E5DFE77-40F9-4A80-9184-96D0F7E025D8} = {A8B419CA-08C1-4216-9024-E01E64D09627}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9255521-2F57-4F6F-85ED-C2D5132C22BD}
