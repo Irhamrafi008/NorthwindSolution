@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Northwind.Contracts.Dto
 {
-    public class ProductDto
+    public class ProductDtoss
     {
         public long? ProductID { get; set; }
         public string Name { get; set; }

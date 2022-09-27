@@ -12,14 +12,22 @@ namespace NorthwindServices
     public class ServicesManager : IServiceManager
     {
         private readonly Lazy<ICategoryServices> _lazyCategoryServices;
+        private readonly Lazy<IProductServices> _lazyProductServices;
+        
 
         public ServicesManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
             _lazyCategoryServices = new Lazy<ICategoryServices>(
                 ()=> new CategoryServices(repositoryManager, mapper)
+                );  
+            _lazyProductServices = new Lazy<IProductServices>(
+
+                () => new ProductServices(repositoryManager, mapper)
                 );
         }
 
         public ICategoryServices CategoryServices => _lazyCategoryServices.Value;
+
+        public IProductServices ProductServices => _lazyProductServices.Value;
     }
 }

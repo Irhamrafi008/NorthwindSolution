@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Northwind.Contracts.Dto.Category;
+using Northwind.Contracts.Dto.Product;
 using Northwind.Domain.Models;
 
 namespace Northwind.Test.Maping
@@ -10,6 +11,11 @@ namespace Northwind.Test.Maping
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, CategoryForCreateDto>().ReverseMap();
+
+            CreateMap<Product, ProductDto>().ReverseMap();
+
+
+
         }
     }
 }
