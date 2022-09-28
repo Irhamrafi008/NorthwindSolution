@@ -1,14 +1,72 @@
-﻿@model Northwind.Domain.Models.Product
-
+﻿@model Northwind.Contracts.Dto.Product.ProductPhotoGroup        
 @{
     ViewData["Title"] = "Create";
 }
+@using (Html.BeginForm("CreateProductPhoto", "ProductPagedServer", 
+    FormMethod.Post, 
+    new {@enctype="multipart/form-data"})){
+        @Html.AntiForgeryToken()
+        <h4 class="mb-3">Create Product Photos</h4>
+        <hr/>
+        @Html.ValidationSummary(true,"",new {@class="text-danger"})
+        <div class="row g-3">
+            <div class="col-md-10">
+                @Html.LabelFor(Model => Model.ProductForCreateDto.ProductName,htmlAttributes : 
+                    new{@class="form-label"})
+                @Html.TextBox("ProductForCreateDto.ProductName",string.Empty, 
+                new{@placeholder="Product Name", @class="form-control"})
+            </div>
+        <div class="col-md-10">
+            @Html.LabelFor(Model => Model.ProductForCreateDto.CategoryId,htmlAttributes :
+            new{@class="form-label"})
+            @Html.DropDownList("ProductForCreateDto.CategoryId",ViewBag.CategoryId,String.Empty,
+            new {@class="form-control"})     
+        </div>
+        <div class="col-md-10">
+            @Html.LabelFor(Model => Model.ProductForCreateDto.SupplierId,htmlAttributes :
+            new{@class="form-label"})
+            @Html.DropDownList("ProductForCreateDto.SupplierId",ViewBag.SupplierId,String.Empty,
+            new {@class="form-control"})
+        </div>
+        <div class="col-md-10">
+            @Html.LabelFor(Model => Model.ProductForCreateDto.UnitsInStock,htmlAttributes :
+            new{@class="form-label"})
+            @Html.TextBox("ProductForCreateDto.UnitsInStock",ViewBag.UnitsInStock,String.Empty,
+            new {@placeholder="UnitsInStock", @class="form-control"})
+        </div>
+        <div class="col-md-10">
+            @Html.LabelFor(Model => Model.ProductForCreateDto.UnitPrice,htmlAttributes :
+            new{@class="form-label"})
+            @Html.TextBox("ProductForCreateDto.UnitPrice",ViewBag.UnitPrice,String.Empty,
+            new {@placeholder="UnitPrice", @class="form-control"})
+        </div>
+        <div class="col-md-10">
+            @Html.LabelFor(Model => Model.ProductForCreateDto.Discontinued,htmlAttributes :
+            new{@class="form-label"})
+            @Html.CheckBox("ProductForCreateDto.Discontinued",false,
+            new {@placeholder="Discontinued", @class="form-check-input"})
+        </div>
+        <div class="col-9">
+            <div>
+                @Html.LabelFor(Model => Model.Photo1,htmlAttributes :new{@class="form-label"})
+                @Html.TextBoxFor(Model => Model.Photo1,"",new{@type="file",@accept="image/*"})
+            </div>
+            <div>
+                @Html.LabelFor(Model => Model.Photo2,htmlAttributes :new{@class="form-label"})
+                @Html.TextBoxFor(Model => Model.Photo2,"",new{@type="file",@accept="image/*"})
+            </div>
+            <div>
+                @Html.LabelFor(Model => Model.Photo3,htmlAttributes :new{@class="form-label"})
+                @Html.TextBoxFor(Model => Model.Photo3,"",new{@type="file",@accept="image/*"})
+            </div>
+        </div>
+        </div>
+        <button type="submit" class="btn-primary">Create</button>
 
-<h1>Create</h1>
+}
 
-<h4>Product</h4>
-<hr />
-<div class="row">
+
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -41,10 +99,7 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

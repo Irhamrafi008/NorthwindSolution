@@ -64,7 +64,13 @@ namespace Northwind.Web.Controllers
             ViewBag.Pagelist = new SelectList(new List<int> { 8, 15, 20 });
 
             return View(productDtoPaging);
+        } 
+
+        public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhoto)
+        {
+            return View("Create");
         }
+
 
         // GET: ProductPagedServer/Details/5
         public async Task<IActionResult> Details(int? id)
