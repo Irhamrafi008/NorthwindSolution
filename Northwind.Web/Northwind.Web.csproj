@@ -28,8 +28,4 @@
     <ProjectReference Include="..\NorthwindServices\NorthwindServices.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
-
 </Project>

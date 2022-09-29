@@ -15,5 +15,7 @@ namespace Northwind.Contracts.Dto.Product
         public string PhotoFileType { get; set; }
         public int? PhotoProductId { get; set; }
         public int? PhotoPrimary { get; set; }
+
+        public virtual ProductDto ProductDto { get; set; }
     }
 }

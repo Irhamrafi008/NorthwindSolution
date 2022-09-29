@@ -38,6 +38,7 @@ namespace Northwind.Web
             services.AddScoped<IEmployee, EmployeeRepository>();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddScoped<IServiceManager, ServicesManager>();
+            services.AddScoped<IUtilityServices, UtilityServices>();
 
             services.AddAutoMapper(typeof(Startup));
 

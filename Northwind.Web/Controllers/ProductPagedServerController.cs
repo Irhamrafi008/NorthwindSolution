@@ -22,13 +22,15 @@ namespace Northwind.Web.Controllers
     {
         private readonly NorthwindContext _context;
         private readonly IServiceManager _servisManager;
+        private readonly IUtilityServices _utilityServices;
 
-    
 
-        public ProductPagedServerController(NorthwindContext context, IServiceManager servisManager)
+
+        public ProductPagedServerController(NorthwindContext context, IServiceManager servisManager, IUtilityServices utilityServices = null)
         {
             _context = context;
             _servisManager = servisManager;
+            _utilityServices = utilityServices;
         }
 
         // GET: ProductPagedServer
@@ -68,12 +70,26 @@ namespace Northwind.Web.Controllers
             ViewBag.Pagelist = new SelectList(new List<int> { 8, 15, 20 });
 
             return View(productDtoPaging);
-        } 
+        }
 
-        public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhotoDto)
+        public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhotoGroupDto)
         {
-            var latesProductId = _servisManager.ProductServices.CreateProductId(productPhotoDto.ProductForCreateDto);
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                var productPhotoGrup = productPhotoGroupDto;
+                var photo1 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo1);
+                var photo2 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo2);
+                var photo3 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo3);
+            }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName");
+            return View("Create");
+        }
+
+
+
+            /*var latesProductId = _servisManager.ProductServices.CreateProductId(productPhotoDto.ProductForCreateDto);
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -110,7 +126,7 @@ namespace Northwind.Web.Controllers
                 }
             }
             return View();
-        }
+        }*/
 
         /*public async Task<IActionResult>CreateProductPhotoos(ProductPhotoGroup productPhotoGroup)
         {

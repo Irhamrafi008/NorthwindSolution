@@ -27,6 +27,7 @@ namespace Northwind.Contracts.Dto.Product
         public bool Discontinued { get; set; }
 
         public virtual CategoryDto CategoryDto { get; set; }
+       
 
     }
 }
