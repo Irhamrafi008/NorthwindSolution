@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Northwind.Contracts.Dto.Product
 {
-    public class ProductPhotoGroup
+    public class ProductPhotoCreateDto
 
     {
-        public ProductForCreateDto ProductForCreateDto { get; set; }
-        public IFormFile Photo1 { get; set; }
-        public IFormFile Photo2 { get; set; }
-        public IFormFile Photo3 { get; set; }
-
+        public string PhotoFilename { get; set; }
+        public short? PhotoFileSize { get; set; }
+        public string PhotoFileType { get; set; }
+        public int? PhotoProductId { get; set; }
+        public int? PhotoPrimary { get; set; }
     }
 }

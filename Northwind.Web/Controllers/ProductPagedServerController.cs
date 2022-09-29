@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using Northwind.Contracts.Dto.Product;
 using Northwind.Domain.Models;
 using Northwind.Persistence;
 using NorthwindServices;
 using NorthwindServicesAbstraction;
 using X.PagedList;
+using ContentDispositionHeaderValue = System.Net.Http.Headers.ContentDispositionHeaderValue;
 
 namespace Northwind.Web.Controllers
 {
@@ -66,10 +70,97 @@ namespace Northwind.Web.Controllers
             return View(productDtoPaging);
         } 
 
-        public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhoto)
+        public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhotoDto)
         {
-            return View("Create");
+            var latesProductId = _servisManager.ProductServices.CreateProductId(productPhotoDto.ProductForCreateDto);
+                if (ModelState.IsValid)
+            {
+                try
+                {
+                    var file = productPhotoDto.AllPhoto;
+                    var folderName = Path.Combine("Resources", "Images");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    if(file.Count > 0)
+                    {
+                        foreach (var item in file)
+                        {
+                            var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                            var fullPath = Path.Combine(pathToSave, fileName);
+                            var dbPath = Path.Combine(folderName, fileName);
+                            using (var stream = new FileStream(fullPath, FileMode.Create))
+                            {
+                                item.CopyTo(stream);
+                            }
+                            var convertSize = (Int16)item.Length;
+                            var productPhoto = new ProductPhotoCreateDto
+                            {
+                                PhotoFilename = fileName,
+                                PhotoFileType = item.ContentType,
+                                PhotoFileSize = (byte)convertSize,
+                                PhotoProductId = latesProductId.ProductId
+                            };
+                            _servisManager.ProductPhotoServices.insert(productPhoto);
+                        }
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+            return View();
         }
+
+        /*public async Task<IActionResult>CreateProductPhotoos(ProductPhotoGroup productPhotoGroup)
+        {
+           
+            var latestProductId = _servisManager.ProductServices.CreateProductId(productPhotoGroup.ProductForCreateDto);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var file = productPhotoGroup.AllPhoto;
+                    var folderName = Path.Combine("Resources", "Images");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    if(file.Count > 0)
+                    {
+                        foreach (var item in file)
+                        {
+                            var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                            var fullPath = Path.Combine(pathToSave, fileName);
+                            var dbPath = Path.Combine(folderName, fileName);
+                            using (var stream = new FileStream(fullPath, FileMode.Create))
+                            {
+                                item.CopyTo(stream);
+                            }
+
+                            var convertSize = (Int16)item.Length;
+                            var productPhoto = new ProductPhotoCreateDto
+                            {
+                                PhotoFilename = fileName,
+                                PhotoFileType = item.ContentType,
+                                PhotoFileSize = (byte)convertSize,
+                                PhotoProductId = latestProductId.ProductId
+                            };
+                            _servisManager.ProductPhotoServices.insert(productPhoto);
+                            
+                        }
+                        return RedirectToAction(nameof(Index));
+                        
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
+                
+            }
+            return View();
+
+        }*/
+
 
 
         // GET: ProductPagedServer/Details/5

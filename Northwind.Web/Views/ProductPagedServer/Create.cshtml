@@ -1,106 +1,95 @@
-﻿@model Northwind.Contracts.Dto.Product.ProductPhotoGroup        
+﻿@model Northwind.Contracts.Dto.Product.ProductPhotoGroup
 @{
     ViewData["Title"] = "Create";
 }
-@using (Html.BeginForm("CreateProductPhoto", "ProductPagedServer", 
-    FormMethod.Post, 
-    new {@enctype="multipart/form-data"})){
-        @Html.AntiForgeryToken()
-        <h4 class="mb-3">Create Product Photos</h4>
-        <hr/>
-        @Html.ValidationSummary(true,"",new {@class="text-danger"})
-        <div class="row g-3">
-            <div class="col-md-10">
-                @Html.LabelFor(Model => Model.ProductForCreateDto.ProductName,htmlAttributes : 
-                    new{@class="form-label"})
-                @Html.TextBox("ProductForCreateDto.ProductName",string.Empty, 
-                new{@placeholder="Product Name", @class="form-control"})
-            </div>
-        <div class="col-md-10">
-            @Html.LabelFor(Model => Model.ProductForCreateDto.CategoryId,htmlAttributes :
-            new{@class="form-label"})
-            @Html.DropDownList("ProductForCreateDto.CategoryId",ViewBag.CategoryId,String.Empty,
-            new {@class="form-control"})     
-        </div>
-        <div class="col-md-10">
-            @Html.LabelFor(Model => Model.ProductForCreateDto.SupplierId,htmlAttributes :
-            new{@class="form-label"})
-            @Html.DropDownList("ProductForCreateDto.SupplierId",ViewBag.SupplierId,String.Empty,
-            new {@class="form-control"})
-        </div>
-        <div class="col-md-10">
-            @Html.LabelFor(Model => Model.ProductForCreateDto.UnitsInStock,htmlAttributes :
-            new{@class="form-label"})
-            @Html.TextBox("ProductForCreateDto.UnitsInStock",ViewBag.UnitsInStock,String.Empty,
-            new {@placeholder="UnitsInStock", @class="form-control"})
-        </div>
-        <div class="col-md-10">
-            @Html.LabelFor(Model => Model.ProductForCreateDto.UnitPrice,htmlAttributes :
-            new{@class="form-label"})
-            @Html.TextBox("ProductForCreateDto.UnitPrice",ViewBag.UnitPrice,String.Empty,
-            new {@placeholder="UnitPrice", @class="form-control"})
-        </div>
-        <div class="col-md-10">
-            @Html.LabelFor(Model => Model.ProductForCreateDto.Discontinued,htmlAttributes :
-            new{@class="form-label"})
-            @Html.CheckBox("ProductForCreateDto.Discontinued",false,
-            new {@placeholder="Discontinued", @class="form-check-input"})
-        </div>
-        <div class="col-9">
-            <div>
-                @Html.LabelFor(Model => Model.Photo1,htmlAttributes :new{@class="form-label"})
-                @Html.TextBoxFor(Model => Model.Photo1,"",new{@type="file",@accept="image/*"})
-            </div>
-            <div>
-                @Html.LabelFor(Model => Model.Photo2,htmlAttributes :new{@class="form-label"})
-                @Html.TextBoxFor(Model => Model.Photo2,"",new{@type="file",@accept="image/*"})
-            </div>
-            <div>
-                @Html.LabelFor(Model => Model.Photo3,htmlAttributes :new{@class="form-label"})
-                @Html.TextBoxFor(Model => Model.Photo3,"",new{@type="file",@accept="image/*"})
-            </div>
-        </div>
-        </div>
-        <button type="submit" class="btn-primary">Create</button>
 
+@using (Html.BeginForm("CreateProductPhoto"
+, "ProductPagedServer"
+, FormMethod.Post
+, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4 class="mb-3">Create Product Photos</h4>
+    <hr />
+    @Html.ValidationSummary(true,"",new {@class="text-danger"})
+    <div class="row g-3">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.ProductForCreateDto.ProductName, htmlAttributes : new{@class="form-label"})
+            @Html.TextBox("productForCreateDto.ProductName",string.Empty,new{@placeholder="Product Name",@class="form-control"})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.ProductForCreateDto.CategoryId, htmlAttributes : new{@class="form-label"})
+            @Html.DropDownList("productForCreateDto.CategoryId",ViewBag.CategoryId, String.Empty, new {@class="form-control"})
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.ProductForCreateDto.SupplierId, htmlAttributes : new{@class="form-label"})
+            @Html.DropDownList("productForCreateDto.SupplierId",ViewBag.SupplierId, String.Empty, new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.ProductForCreateDto.UnitsInStock, htmlAttributes : new{@class="form-label"})
+            @Html.TextBox("productForCreateDto.UnitsInStock",string.Empty,new{@placeholder="Units In Stock",@class="form-control"})
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.ProductForCreateDto.UnitPrice, htmlAttributes : new{@class="form-label"})
+            @Html.TextBox("productForCreateDto.UnitPrice",string.Empty,new{@placeholder="Unit Price",@class="form-control"})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-10">
+            @Html.CheckBox("productForCreateDto.Discontinued",false,new{@class="form-check-input"})
+            @Html.LabelFor(model => model.ProductForCreateDto.Discontinued, htmlAttributes : new{@class="form-label"})
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="row text-center text-lg-start">
+            <div class="col-lg-4 col-md-4 col-6">
+                <img id="preview1" style="width:100px;height:100px">
+                @Html.LabelFor(model => model.Photo1, htmlAttributes : new{@class="form-label"})
+                <br>
+                @Html.TextBoxFor(model => model.AllPhoto,"",
+            new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview1')"})
+            </div>
+            <div class="col-lg-4 col-md-4 col-6">
+                <img id="preview2" style="width:100px;height:100px">
+                @Html.LabelFor(model => model.Photo2, htmlAttributes : new{@class="form-label"})
+                <br>
+                @Html.TextBoxFor(model => model.AllPhoto,"",
+            new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview2')"})
+            </div>
+            <div class="col-lg-4 col-md-4 col-6">
+                <img id="preview3" style="width:100px;height:100px">
+                @Html.LabelFor(model => model.Photo3, htmlAttributes : new{@class="form-label"})
+                <br>
+                @Html.TextBoxFor(model => model.AllPhoto,"",
+            new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview3')"})
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create</button>
 }
 
-
-@*<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SupplierId" class="control-label"></label>
-                <select asp-for="SupplierId" class ="form-control" asp-items="ViewBag.SupplierId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="QuantityPerUnit" class="control-label"></label>
-                <input asp-for="QuantityPerUnit" class="form-control" />
-                <span asp-validation-for="QuantityPerUnit" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Discontinued" /> @Html.DisplayNameFor(model => model.Discontinued)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-*@
+<script>
+    function previewImage(elemen, value) {
+        //store file image to variable files
+        const files = elemen.files[0];
+        //create object FileReader
+        const fileReader = new FileReader();
+        //read files from element input type
+        fileReader.readAsDataURL(files);
+        //send result base64 image to element html preview1
+        fileReader.onload = function (event) {
+            document.getElementById(value).src = event.target.result;
+        }
+    }
+</script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

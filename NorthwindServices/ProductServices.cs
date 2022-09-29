@@ -57,5 +57,14 @@ namespace NorthwindServices
             var productDto = _mapper.Map<IEnumerable<ProductDto>>(pproductMdl);
             return productDto;
         }
+
+        public ProductDto CreateProductId(ProductForCreateDto productForCreateDto)
+        {
+            var productMdl = _mapper.Map<Product>(productForCreateDto);
+            _repositoryManager.ProductRepository.Insert(productMdl);
+            _repositoryManager.save();
+            var productDto = _mapper.Map<ProductDto>(productMdl);
+            return productDto;
+        }
     }
 }

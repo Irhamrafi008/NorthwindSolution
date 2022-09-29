@@ -13,7 +13,10 @@ namespace Northwind.Test.Maping
             CreateMap<Category, CategoryForCreateDto>().ReverseMap();
 
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Product, ProductForCreateDto>().ReverseMap();
 
+            CreateMap<ProductPhoto, ProductPhotoDto>().ReverseMap();
+            CreateMap<ProductPhoto, ProductPhotoCreateDto>().ReverseMap();
 
 
         }

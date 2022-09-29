@@ -10,5 +10,6 @@ namespace NorthwindServicesAbstraction
     {
         ICategoryServices CategoryServices { get; }
         IProductServices ProductServices { get; }
+        IProductPhotoServices ProductPhotoServices { get; }
     }
 }

@@ -1,19 +1,25 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Northwind.Contracts.Dto.Product
 {
-    public class ProductPhotoDto
-    {
+    public class ProductPhotoGroup
 
-        public int PhotoId { get; set; }
-        public string PhotoFilename { get; set; }
-        public short? PhotoFileSize { get; set; }
-        public string PhotoFileType { get; set; }
-        public int? PhotoProductId { get; set; }
-        public int? PhotoPrimary { get; set; }
+    {
+        public ProductForCreateDto ProductForCreateDto { get; set; }
+        [Display(Name = "Photo 1")]
+        public IFormFile Photo1 { get; set; }
+        [Display(Name = "Photo 2")]
+        public IFormFile Photo2 { get; set; }
+        [Display(Name = "Photo 3")]
+        public IFormFile Photo3 { get; set; }
+
+        public List<IFormFile> AllPhoto { get; set; }
+
     }
 }

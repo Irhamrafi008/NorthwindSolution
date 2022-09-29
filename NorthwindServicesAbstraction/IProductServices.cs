@@ -15,10 +15,12 @@ namespace NorthwindServicesAbstraction
         Task<ProductDto> GetproductById(int categoryID, bool trackChanges);
         Task<IEnumerable<ProductDto>> GetProductPaged(int pageIndex, int pageSize, bool trackChanges);
 
+        ProductDto CreateProductId(ProductForCreateDto productForCreateDto);
+
         void insert(ProductForCreateDto productForCreateDto);
 
         void edit(ProductDto productDto);
 
-        void remove(ProductDto categoryDto);
+        void remove(ProductDto productDto);
     }
 }

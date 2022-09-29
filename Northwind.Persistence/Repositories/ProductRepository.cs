@@ -18,7 +18,7 @@ namespace Northwind.Persistence.Repositories
 
         public void Edit(Product product)
         {
-            throw new NotImplementedException();
+           Update(product); 
         }
 
         public async Task<IEnumerable<Product>> GetAllProduct(bool trackChanges)
@@ -43,12 +43,12 @@ namespace Northwind.Persistence.Repositories
 
         public void Insert(Product product)
         {
-            throw new NotImplementedException();
+            Create(product);
         }
 
         public void Remove(Product product)
         {
-            throw new NotImplementedException();
+            Delete(product);
         }
     }
 }
