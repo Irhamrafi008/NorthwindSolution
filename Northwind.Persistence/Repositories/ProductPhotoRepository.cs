@@ -23,12 +23,13 @@ namespace Northwind.Persistence.Repositories
 
         public async Task<IEnumerable<ProductPhoto>> GetAllProductPhoto(bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(c => c.PhotoProductId).ToListAsync();
+            return await FindAll(trackChanges)
+                .OrderBy(c => c.PhotoId).ToListAsync();
         }
 
         public async Task<ProductPhoto> GetProductPhotoById(int productPhotoId, bool trackChanges)
         {
-            return await FindByCondition(c => c.PhotoProductId.Equals(productPhotoId), trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(c => c.PhotoId.Equals(productPhotoId), trackChanges).SingleOrDefaultAsync();
         }
 
         public void Insert(ProductPhoto productPhoto)

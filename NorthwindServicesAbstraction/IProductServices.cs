@@ -17,6 +17,8 @@ namespace NorthwindServicesAbstraction
 
         ProductDto CreateProductId(ProductForCreateDto productForCreateDto);
 
+        void CreateProductManyPhoto(ProductForCreateDto productForCreateDto, 
+                                    List<ProductPhotoCreateDto>productPhotoCreateDtos);
         void insert(ProductForCreateDto productForCreateDto);
 
         void edit(ProductDto productDto);

@@ -14,13 +14,17 @@ namespace Northwind.Contracts.Dto.Product
         [StringLength(50, ErrorMessage = "product Name Cannot be longer than 50")]
         public string ProductName { get; set; }
         [Display(Name ="Supplier ID")]
+        [Required]
         public int? SupplierId { get; set; }
         [Display(Name ="Category ID")]
+        [Required]
         public int? CategoryId { get; set; }
         public string QuantityPerUnit { get; set; }
         [Display(Name ="Unit Price")]
+        [Required]
         public decimal? UnitPrice { get; set; }
         [Display (Name ="Unit in Stock")]
+        [Required]
         public short? UnitsInStock { get; set; }
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }

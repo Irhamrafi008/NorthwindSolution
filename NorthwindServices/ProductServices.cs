@@ -29,32 +29,40 @@ namespace NorthwindServices
        
         }
 
-        public Task<ProductDto> GetproductById(int categoryID, bool trackChanges)
+        public async Task<ProductDto> GetproductById(int categoryID, bool trackChanges)
         {
-            throw new NotImplementedException();
+            var productMdl = await _repositoryManager.ProductRepository.GetProductByID(categoryID, trackChanges);
+            var productDto = _mapper.Map<ProductDto>(productMdl);
+            return productDto;
         }
 
         public void insert(ProductForCreateDto productForCreateDto)
         {
-            throw new NotImplementedException();
+            var productMdl = _mapper.Map<Product>(productForCreateDto);
+            _repositoryManager.ProductRepository.Insert(productMdl);
+            _repositoryManager.save();
         }
 
         public void edit(ProductDto productDto)
         {
-            throw new NotImplementedException();
+            var productMdl = _mapper.Map<Product>(productDto);
+            _repositoryManager.ProductRepository.Edit(productMdl);
+            _repositoryManager.save();
         }
 
         public void remove(ProductDto categoryDto)
         {
-            throw new NotImplementedException();
+            var productMdl = _mapper.Map<Product>(categoryDto);
+            _repositoryManager.ProductRepository.Remove(productMdl);
+            _repositoryManager.save();
         }
 
         public async Task<IEnumerable<ProductDto>> GetProductPaged(int pageIndex, int pageSize, bool trackChanges)
         {
-            var pproductMdl = await _repositoryManager
+            var productMdl = await _repositoryManager
                 .ProductRepository.GetProductPaged(pageIndex, pageSize  , trackChanges);
 
-            var productDto = _mapper.Map<IEnumerable<ProductDto>>(pproductMdl);
+            var productDto = _mapper.Map<IEnumerable<ProductDto>>(productMdl);
             return productDto;
         }
 
@@ -65,6 +73,26 @@ namespace NorthwindServices
             _repositoryManager.save();
             var productDto = _mapper.Map<ProductDto>(productMdl);
             return productDto;
+        }
+
+        public void CreateProductManyPhoto(ProductForCreateDto productForCreateDto, List<ProductPhotoCreateDto> productPhotoCreateDtos)
+        {
+            //1. insert into table produk
+            var productMdl = _mapper.Map<Product>(productForCreateDto);
+            _repositoryManager.ProductRepository.Insert(productMdl);
+            _repositoryManager.save();
+
+            //insert into table productPhotos
+            foreach (var item in productPhotoCreateDtos)
+            {
+                item.PhotoProductId = productMdl.ProductId;
+                var photoModel = _mapper.Map<ProductPhoto>(item);
+                _repositoryManager.ProductPhotoRepository.Insert(photoModel);
+            }
+            _repositoryManager.save();
+            {
+
+            }
         }
     }
 }

@@ -33,16 +33,11 @@ namespace Northwind.Web.Controllers
             _utilityServices = utilityServices;
         }
 
-        // GET: ProductPagedServer
-        public async Task<IActionResult> Index(string searchString, 
-            string currentFilter, int? page,int? fetchSize)
+
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? page)
         {
-            /*var northwindContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await northwindContext.ToListAsync());*/
-           
-            var pageIndex = page ?? 1;
-            var pageSize = fetchSize ?? 5;
-            
+
+            var pageNumber = page ?? 1;
 
             if (searchString != null)
             {
@@ -56,30 +51,73 @@ namespace Northwind.Web.Controllers
             // ViewBag.PageSearching
             ViewBag.PageSearching = searchString;
 
-            var productDto = await _servisManager.ProductServices
-                .GetProductPaged(pageIndex, pageSize, false);
-            var totalRows = productDto.Count();
-            
-
+            var productDto = await _servisManager.ProductServices.GetAllProduct(false);
             if (!String.IsNullOrEmpty(searchString))
             {
                 productDto = productDto.Where(p => p.ProductName.ToLower().Contains(searchString.ToLower()));
             }
-            var productDtoPaging =
-                new StaticPagedList<ProductDto>(productDto, pageIndex, pageSize -(pageSize-1), totalRows);
-            ViewBag.Pagelist = new SelectList(new List<int> { 8, 15, 20 });
-
-            return View(productDtoPaging);
+            return View(productDto.ToPagedList(pageNumber, 10));
         }
+        // GET: ProductPagedServer
+        /*  public async Task<IActionResult> Index(string searchString, 
+              string currentFilter, int? page,int? fetchSize)
+          {
+              *//*var northwindContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
+              return View(await northwindContext.ToListAsync());*//*
+
+              var pageIndex = page ?? 1;
+             *//* var pageSize = fetchSize ?? 5;*//*
+
+
+              if (searchString != null)
+              {
+                  page = 1;
+              }
+              else
+              {
+                  searchString = currentFilter;
+              }
+              // setelah kata ViewBag bisa dilanjutkan dengan penamaan bebas, seperti ViewBag.CurrentFilter maupun 
+              // ViewBag.PageSearching
+              ViewBag.currentFiltler = searchString;
+
+              var productDto = await _servisManager.ProductServices
+                  .GetProductPaged(pageIndex, pageSize, false);
+              var totalRows = productDto.Count();
+
+
+              if (!String.IsNullOrEmpty(searchString))
+              {
+                  productDto = productDto.Where(p => p.ProductName.ToLower().Contains(searchString.ToLower()));
+              }
+              var productDtoPaging =
+                  new StaticPagedList<ProductDto>(productDto, pageIndex, pageSize -(pageSize-1), totalRows);
+              ViewBag.Pagelist = new SelectList(new List<int> { 8, 15, 20 });
+
+              return View(productDtoPaging);
+          }*/
 
         public async Task<IActionResult> CreateProductPhoto(ProductPhotoGroup productPhotoGroupDto)
         {
             if (ModelState.IsValid)
             {
                 var productPhotoGrup = productPhotoGroupDto;
-                var photo1 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo1);
-                var photo2 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo2);
-                var photo3 = _utilityServices.UploadSingleFile(productPhotoGrup.Photo3);
+                var listPhoto = new List<ProductPhotoCreateDto>();
+                foreach (var itemPhoto in productPhotoGroupDto.AllPhoto)
+                {
+                    var FileName = _utilityServices.UploadSingleFile(itemPhoto);
+                    var photo = new ProductPhotoCreateDto
+                    {
+                        PhotoFilename = FileName,
+                        PhotoFileSize = (short?)itemPhoto.Length,
+                        PhotoFileType = itemPhoto.ContentType
+                    };
+                    listPhoto.Add(photo);
+                }
+                _servisManager.ProductServices.
+                    CreateProductManyPhoto(productPhotoGroupDto.ProductForCreateDto, listPhoto);
+                
+                
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName");

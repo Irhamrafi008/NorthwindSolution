@@ -55,29 +55,29 @@
         <div class="row text-center text-lg-start">
             <div class="col-lg-4 col-md-4 col-6">
                 <img id="preview1" src="../Resources/Images/nophoto.jpeg" style="width:100px;height:100px">
-                @Html.LabelFor(model => model.Photo1, htmlAttributes : new{@class="form-label"})
+                @*@Html.LabelFor(model => model.Photo1, htmlAttributes : new{@class="form-label"})*@
                 <br>
-                @Html.TextBoxFor(model => model.Photo1,"",
+                @Html.TextBoxFor(model => model.AllPhoto,"",
                 new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview1')"})
-                <button type="button" onclick="clearPhoto('Photo1','preview1')" style="width:50px">Clear</button>
+                <button type="button" onclick="clearPhoto('AllPhoto','preview1')" style="width:50px">Clear</button>
                 @Html.ValidationMessage("Photo1", new{@class="text-danger"})
             </div>
             <div class="col-lg-4 col-md-4 col-6">
                 <img id="preview2" src="../Resources/Images/nophoto.jpeg" style="width:100px;height:100px">
-                @Html.LabelFor(model => model.Photo2, htmlAttributes : new{@class="form-label"})
+                @*@Html.LabelFor(model => model.Photo2, htmlAttributes : new{@class="form-label"})*@
                 <br>
-                @Html.TextBoxFor(model => model.Photo2,"",
+                @Html.TextBoxFor(model => model.AllPhoto,"",
             new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview2')"})
-            <button type="button" onclick="clearPhoto('Photo2','preview2')" style="width:50px">Clear</button>
+            <button type="button" onclick="clearPhoto('AllPhoto','preview2')" style="width:50px">Clear</button>
                 @Html.ValidationMessage("Photo2", new{@class="text-danger"})
             </div>
             <div class="col-lg-4 col-md-4 col-6">
                 <img id="preview3" src="../Resources/Images/nophoto.jpeg" style="width:100px;height:100px">
-                @Html.LabelFor(model => model.Photo3, htmlAttributes : new{@class="form-label"})
+                @*@Html.LabelFor(model => model.Photo3, htmlAttributes : new{@class="form-label"})*@
                 <br>
-                @Html.TextBoxFor(model => model.Photo3,"",
+                @Html.TextBoxFor(model => model.AllPhoto,"",
             new{@type="file",@accept="image/*", @onchange="previewImage(this,'preview3')"})
-            <button type="button" onclick="clearPhoto('Photo3','preview3')" style="width:50px">Clear</button>
+            <button type="button" onclick="clearPhoto('AllPhoto','preview3')" style="width:50px">Clear</button>
                 @Html.ValidationMessage("Photo3", new{@class="text-danger"})
             </div>
         </div>

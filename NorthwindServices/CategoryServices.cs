@@ -5,6 +5,7 @@ using Northwind.Domain.Models;
 using NorthwindServicesAbstraction;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NorthwindServices
@@ -23,7 +24,9 @@ namespace NorthwindServices
 
         public void edit(CategoryDto categoryDto)
         {
-            throw new NotImplementedException();
+            var categoryMdl = _mapper.Map<Category>(categoryDto);
+            _repositoryManager.CategoryRepository.edit(categoryMdl);
+            _repositoryManager.save();
         }
 
         public async Task<IEnumerable<CategoryDto>> GetAllCategories(bool trackChanges)
@@ -33,9 +36,11 @@ namespace NorthwindServices
             return categoryDto;
         }
 
-        public Task<CategoryDto> GetCategoryById(int categoryId, bool trackChanges)
+        public async Task<CategoryDto> GetCategoryById(int categoryId, bool trackChanges)
         {
-            throw new NotImplementedException();
+            var categoryMdl = await _repositoryManager.CategoryRepository.GetCategoryById(categoryId, trackChanges);
+            var categoryDto = _mapper.Map<CategoryDto>(categoryMdl);
+            return categoryDto;
         }
 
         public void insert(CategoryForCreateDto categoryForCreateDto)
@@ -47,7 +52,9 @@ namespace NorthwindServices
 
         public void remove(CategoryDto categoryDto)
         {
-            throw new NotImplementedException();
+            var categoryMdl = _mapper.Map<Category>(categoryDto);
+            _repositoryManager.CategoryRepository.remove(categoryMdl);
+            _repositoryManager.save();
         }
     }
 }

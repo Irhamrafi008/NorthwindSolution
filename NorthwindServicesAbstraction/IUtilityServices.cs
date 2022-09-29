@@ -10,5 +10,7 @@ namespace NorthwindServicesAbstraction
     public interface IUtilityServices
     {
         string UploadSingleFile(IFormFile formFile);
+
+
     }
 }
