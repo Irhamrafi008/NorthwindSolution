@@ -12,6 +12,7 @@ namespace Northwind.Contracts.Dto.Product
 
     {
         public ProductForCreateDto ProductForCreateDto { get; set; }
+        public ProductDto ProductDto { get; set; }
 
         [Display(Name = "Photo 1")]
         public IFormFile Photo1 { get; set; }

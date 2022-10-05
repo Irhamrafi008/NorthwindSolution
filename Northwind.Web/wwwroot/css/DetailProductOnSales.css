@@ -1,0 +1,275 @@
+﻿/*gambar*/
+.page--ticket-detail .ticket-detail_wrapper .content_image {
+    width: 100%;
+    display: block;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Montserrat,serif;
+    font-size: 16px;
+    color: #353437;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-align: left;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+/*box kanan gambar*/
+.page--ticket-detail .ticket-detail_wrapper .wrapper_orders {
+    padding: 10px;
+}
+
+.page--ticket-detail .ticket-detail_wrapper .wrapper_orders {
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 30%);
+    position: relative;   
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+
+.page--ticket-detail .ticket-detail_wrapper .orders_title {
+    font-size: 1rem;
+}
+
+.page--ticket-detail .ticket-detail_wrapper .orders_title {
+    text-transform: none;
+    display: block;
+    line-height: 1.5;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Gotham,sans-serif;
+    font-weight : 500;
+}
+h3 {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+/*startfrom*/
+.page--ticket-detail .ticket-detail_wrapper .orders_title span {
+    color: #2b2727;
+    font-weight: 800;
+    font-size: 2.2em;
+}
+.page--ticket-detail .ticket-detail_wrapper .orders_title {
+    text-transform: none;
+    display: block;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.page--ticket-detail .ticket-detail_wrapper .orders_header {
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #dfdfe7;
+}
+
+
+/*borderkanan*/
+.mli-accordion .card.is-active {
+    border: 1px solid #353437 !important;
+}
+.accordion > .card:last-of-type {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.accordion > .card:first-of-type {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.accordion > .card {
+    overflow: hidden;
+}
+.card {
+    position: relative; 
+    display: flex; 
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+}
+
+/*presale*/
+.page--ticket-detail .ticket-detail_wrapper .mli-accordion .btn-link span {
+    flex-grow: 1;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.mli-accordion .card-header .btn-link {
+    font-size: 1rem;
+    padding: 0.5em 2.25em 0.5em 1.25em;
+}
+.mli-accordion .card-header .btn-link {
+    font-weight: 500;
+    color: #505050;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1em 2.25em 1em 1.25em;
+    text-decoration: none !important;
+    position: relative;
+    line-height: 1.2;
+}
+.page--ticket-detail .ticket-detail_wrapper .mli-accordion .btn-link .highlight {
+    text-align: right;
+    font-weight: 900;
+    font-size: 1.1em;
+    line-height: 1.2;
+    color: #343a6c;
+    padding-left: 1em;
+}
+.page--ticket-detail .ticket-detail_wrapper .mli-accordion .btn-link span {
+    flex-grow: 1;
+}
+
+/*TotalItem*/
+.page--ticket-detail .ticket-detail_wrapper .mli-accordion .label {
+    flex-grow: 1;
+    text-align: left;
+    display: inline-block;
+    color: #353437;
+    font-weight: 700;
+}
+.page--ticket-detail .ticket-detail_wrapper .mli-accordion .form-inline {
+    margin-top: 0;
+}
+.form-inline {   
+    display: flex;   
+    flex-flow: row wrap;
+    align-items: center;
+}
+.form-inline label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.form-control__number-wrapper .btn-substract {
+    background-image: url(../css/ico-substract.png);
+    left: 16em;
+    
+    
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.form-control__number-wrapper .btn-add, .form-control__number-wrapper .btn-substract {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 1.6em;
+    width: 1.6em;
+    top: 10em;
+    z-index: 2;
+    cursor: pointer;
+    border: none;
+    outline: none !important;
+    
+}
+
+.form-control__number-wrapper .btn-add {
+    background-image: url(../css/ico-add.png);
+    right: 0.6em;
+}
+
+/*OrderSumarry*/
+.page--ticket-detail .ticket-detail_wrapper .content_subtitle {
+    font-size: 1.1rem;
+}
+.page--ticket-detail .ticket-detail_wrapper .content_subtitle {
+    line-height: 1.4;
+    display: inline-block;
+}
+.page--ticket-detail .ticket-detail_wrapper .content_subtitle {
+    font-family: Montserrat,serif;
+    text-transform: none;
+    font-weight: 700;
+    color: #353437;
+    margin-bottom: 0.9em;
+}
+
+/*totalPurchasing*/
+.page--ticket-detail .ticket-detail_wrapper .total-purchase span {
+    vertical-align: middle;
+}
+.page--ticket-detail .ticket-detail_wrapper .total-purchase {
+    font-size: 1rem;
+}
+.page--ticket-detail .ticket-detail_wrapper .total-purchase {
+    font-weight: 700;
+    margin-bottom: 2em;
+    
+}
+.page--ticket-detail .ticket-detail_wrapper .total-purchase .nominal {
+    float: right;
+    color: #d5b143;
+    font-weight: 900;
+    font-size: 1.5em;
+    line-height: 1;
+}
+.page--ticket-detail .ticket-detail_wrapper .total-purchase span {
+    vertical-align: middle;
+}
+
+/*buytiker*/
+.page--ticket-detail .ticket-detail_wrapper .cta-btn {
+    width: 100%;
+    font-size: .9em;
+  
+}
+.mli-btn--primary:focus, .mli-btn--primary:hover {
+    background: #bb972a;
+    border: 2px solid #bb972a;
+    color: #353437;
+    
+}
+
+/*description*/
+
+.page--ticket-detail .ticket-detail_wrapper .content_title {
+    font-size: 1.4rem;
+    padding : 20px;
+}
+.page--ticket-detail .ticket-detail_wrapper .content_title {
+    line-height: 1.4;
+    display: inline-block;
+  
+}
+.page--ticket-detail .ticket-detail_wrapper .content_title {
+    font-family: Montserrat,serif;
+    text-transform: none;
+    font-weight: 900;
+    color: #353437;
+    margin-bottom: 0.9em;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+}

@@ -11,5 +11,9 @@ namespace NorthwindServicesAbstraction
         ICategoryServices CategoryServices { get; }
         IProductServices ProductServices { get; }
         IProductPhotoServices ProductPhotoServices { get; }
+        ISuppliersServices SuppliersServices { get; }
+        IOrdersDetailsServices OrdersDetailsServices { get; }
+        IOrdersServices OrdersServices { get; }
+        
     }
 }

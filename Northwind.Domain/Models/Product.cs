@@ -28,5 +28,6 @@ namespace Northwind.Domain.Models
         public virtual Supplier Supplier { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
+        
     }
 }

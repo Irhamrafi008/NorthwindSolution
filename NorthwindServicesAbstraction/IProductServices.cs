@@ -1,5 +1,7 @@
 ﻿using Northwind.Contracts.Dto;
 using Northwind.Contracts.Dto.Category;
+using Northwind.Contracts.Dto.Order;
+using Northwind.Contracts.Dto.OrderDetails;
 using Northwind.Contracts.Dto.Product;
 using System;
 using System.Collections.Generic;
@@ -19,8 +21,13 @@ namespace NorthwindServicesAbstraction
 
         void CreateProductManyPhoto(ProductForCreateDto productForCreateDto, 
                                     List<ProductPhotoCreateDto>productPhotoCreateDtos);
-        void insert(ProductForCreateDto productForCreateDto);
+        Task<IEnumerable<ProductDto>> GetProductOnSales(bool trackChanges);
+        Task<ProductDto> GetAllProductOnSalesById(int productOnsalesId, bool trackChanges);
+        void CreateOrder(OrdersForCreateDto ordersForCreateDto, OrderDetailsForCreateDto orderDetailsForCreateDto);
+        void EditProductPhoto(ProductDto productDto, List<ProductPhotoDto> productPhotoDtos);
 
+        void insert(ProductForCreateDto productForCreateDto);
+        
         void edit(ProductDto productDto);
 
         void remove(ProductDto productDto);

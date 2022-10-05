@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Northwind.Contracts.Dto.Category;
+using Northwind.Contracts.Dto.Order;
+using Northwind.Contracts.Dto.OrderDetails;
 using Northwind.Contracts.Dto.Product;
 using Northwind.Domain.Base;
 using Northwind.Domain.Models;
@@ -90,9 +92,53 @@ namespace NorthwindServices
                 _repositoryManager.ProductPhotoRepository.Insert(photoModel);
             }
             _repositoryManager.save();
+          
+        }
+
+        public async Task<IEnumerable<ProductDto>> GetProductOnSales(bool trackChanges)
+        {
+            var productMdl = await _repositoryManager.ProductRepository.GetProductOnSales(trackChanges);
+            var productDto = _mapper.Map<IEnumerable<ProductDto>>(productMdl);
+            return productDto;
+        }
+
+        public async Task<ProductDto> GetAllProductOnSalesById(int productOnsalesId, bool trackChanges)
+        {
+            var productOnsalesMdl = await _repositoryManager.ProductRepository.GetProductOnSalesById(productOnsalesId, trackChanges);
+            var productOnSalesDto = _mapper.Map<ProductDto>(productOnsalesMdl);
+            return productOnSalesDto;
+        }
+
+        public void CreateOrder(OrdersForCreateDto ordersForCreateDto, OrderDetailsForCreateDto orderDetailsForCreateDto)
+        {
+            //insert Order
+            var orderMdl = _mapper.Map<Order>(ordersForCreateDto);
+            _repositoryManager.OrdersRepository.Insert(orderMdl);
+            _repositoryManager.save();
+
+            //insert Order Detail
+            var orderDetail = _mapper.Map<OrderDetail>(orderDetailsForCreateDto);
+            orderDetail.OrderId = orderMdl.OrderId;
+            _repositoryManager.OrdersDetailsRepository.Insert(orderDetail);
+            _repositoryManager.save();
+        }
+
+        public void EditProductPhoto(ProductDto productDto, List<ProductPhotoDto> productPhotoDtos)
+        {
+            // insert Product
+            var productMdl = _mapper.Map<Product>(productDto);
+            _repositoryManager.ProductRepository.Edit(productMdl);
+            _repositoryManager.save();
+
+            //insert product photo
+            foreach (var item in productPhotoDtos)
             {
+                item.PhotoProductId = productMdl.ProductId;
+                var photoMdl = _mapper.Map<ProductPhoto>(item);
+                _repositoryManager.ProductPhotoRepository.Edit(photoMdl);
 
             }
+            _repositoryManager.save();
         }
     }
 }
