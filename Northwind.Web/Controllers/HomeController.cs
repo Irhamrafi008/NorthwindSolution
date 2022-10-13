@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Northwind.Domain.Models;
 using Northwind.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -12,16 +15,21 @@ namespace Northwind.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            var myName = "Irham Rafi";
-            return View("index", myName);
+            var myName = _userManager.GetUserId(User);
+            return View("Index", myName);
         }
 
         public IActionResult Privacy()

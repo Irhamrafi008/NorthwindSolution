@@ -10,8 +10,10 @@ namespace Northwind.Domain.Repositories
     public interface IOrderDetailsRepository
     {
         Task<IEnumerable<OrderDetail>> GetAllOrderDetails(bool trackChanges);
+        Task<IEnumerable<OrderDetail>> GetAllCartItem(string CartID, bool trackChanges);
         Task<OrderDetail>GettAllOrderDetailsById(int orderDetailId, bool trackChanges);
         Task<OrderDetail>GetOrderDetailById(int orderDetailID,bool trackChanges);
+        Task<OrderDetail> GetOrderDetails(int orderId, int productId, bool trackChanges);
         void Insert(OrderDetail orderDetail);
         void Edit(OrderDetail orderDetail);
         void Remove(OrderDetail orderDetail);

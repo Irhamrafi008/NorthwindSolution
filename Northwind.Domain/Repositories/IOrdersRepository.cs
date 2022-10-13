@@ -11,6 +11,7 @@ namespace Northwind.Domain.Repositories
     {
         Task<IEnumerable<Order>> GetAllOrders(bool trackChanges);
         Task<Order> GetOrderById(int OrderId, bool trackChanges);
+        Task<Order>FilterCustId(string custId, bool trackChanges);
         void Insert(Order order);
         void Edit(Order order);
         void Remove(Order order);

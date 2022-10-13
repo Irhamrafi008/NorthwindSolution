@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Northwind.Domain.Dto;
 using Northwind.Domain.Models;
 using Northwind.Domain.Repositories;
 using Northwind.Persistence.Base;
@@ -23,14 +24,18 @@ namespace Northwind.Persistence.Repositories
 
         public async Task<IEnumerable<Product>> GetAllProduct(bool trackChanges)
         {
-            return await FindAll(trackChanges).Include (c => c.Category)
+            return await FindAll(trackChanges)
+                .Include(c => c.Category)
                 .Include(c => c.Supplier)
                 .OrderBy(c => c.ProductId).ToListAsync();
         }
 
         public async Task<Product> GetProductByID(int productID, bool trackChanges)
         {
-            return await FindByCondition(c => c.ProductId.Equals(productID), trackChanges).SingleOrDefaultAsync();
+            return await FindByCondition(c => c.ProductId.Equals(productID), trackChanges)
+                .Include(c=> c.Category)
+                .Include(c=> c.Supplier)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductOnSales(bool trackChanges)
@@ -58,6 +63,22 @@ namespace Northwind.Persistence.Repositories
                 .Include(c => c.Category)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize).ToListAsync();
+        }
+
+        public IEnumerable<TotalproductByCategory> GetTotalProductBycategory()
+        {
+            var rawSQL = _dbContext.TotalProductByCategorySQL
+                .FromSqlRaw("select c.CategoryName, count(p.productId)TotalProduct " +
+                 "from Products p join Categories c on p.CategoryID = c.CategoryID " +
+                 "group by c.CategoryName")
+                .Select(x => new TotalproductByCategory
+                {
+                    CategoryName = x.CategoryName,
+                    TotalProduct = x.TotalProduct
+                })
+                .OrderBy(x => x.TotalProduct)
+                .ToList();
+            return rawSQL;
         }
 
         public void Insert(Product product)

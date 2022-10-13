@@ -4,6 +4,109 @@
 @{
     ViewData["Title"] = "Details";
 }
+
+@using (Html.BeginForm("CartItem"
+, "OrderDetails"
+, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    @Html.HiddenFor(model => model.ProductId)
+                    @Html.HiddenFor(model => model.UnitPrice)
+                    <h4>@Model.ProductName</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="col-md">
+                            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach (var item in Model.ProductPhotos)
+                                    {
+                                        if (Model.ProductPhotos.FirstOrDefault() == item)
+                                        {
+                                            <div class="carousel-item active">
+                                                <img src="@Url.Content("~/Resources/images/" + item.PhotoFilename)" class="card-img-top" alt="Image">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="carousel-item">
+                                                <img src="@Url.Content("~/Resources/images/" + item.PhotoFilename)" class="card-img-top" alt="Image">
+                                            </div>
+                                        }
+                                    }
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h3>Product Description</h3>
+                        <h5>Product Name</h5>
+                        <h5>Product Price</h5>
+                        <h5>Category Name</h5>
+                        <h5>Unit Stock</h5>
+                        <h5>Quantity</h5>
+                    </div>
+                    <div class="col-md-6 col-lg-1">
+                        <h3><br /></h3>
+                        <h5>:</h5>
+                        <h5>:</h5>
+                        <h5>:</h5>
+                        <h5>:</h5>
+                    </div>
+                    <div class="cold-md-6 col-lg-4">
+                        <h3><br /></h3>
+                        <h5>@Html.DisplayFor(model => model.ProductName)</h5>
+                        <h5>@Html.DisplayFor(model => model.UnitPrice)</h5>
+                        <h5>@Html.DisplayFor(model => model.CategoryDto.CategoryName)</h5>
+                        <h5>@Html.DisplayFor(model => model.UnitsInStock)</h5>
+                        @Html.TextBox("QuantityPerUnit",1,new{@type="number", @id="quantity"})
+                    </div>
+                </div>
+                @*<a asp-action="CreateOrderBuyNow">
+            <input type="button" class="btn btn-secondary" value="Buy Now">
+            </a>*@
+                <input type="submit" class="btn btn-secondary" value="Buy Now" formaction="@Url.Action("BuyNow")" formmethod="post">
+                <input type="submit" class="btn btn-primary" value="Add Cart">
+                <button type="submit" class="btn btn-primary" style="margin-left:1200px">Add Cart</button>
+            </div>
+        </div>
+    </body>
+}
+@*<script>
+    function getQuantity(){
+        var input = document.getElementById("quantity").value;
+    }
+</script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+@{
+    ViewData["Title"] = "Details";
+}
 @using (Html.BeginForm("CreateOrder",
 "ProductOnSale",FormMethod.Post))
 {
@@ -56,7 +159,7 @@
                                                 <p>
                                                   
                                                     @Html.LabelFor(model=>model.UnitPrice) :
-                                                        @Html.HiddenFor(model => model.UnitPrice)
+                                                    @Html.HiddenFor(model => model.UnitPrice)
                                                     @Html.DisplayFor(model=>model.UnitPrice)                                                  
                                                     <br>
                                                     @Html.LabelFor(model => model.UnitsInStock) :
@@ -103,8 +206,7 @@
                                                             <div class="form-inline">
                                                                 <label class="label" for="tickets-243">Total Item</label>
                                                                 <div class="form-control__number-wrapper">
-                                                                    <input type="hidden" id="" value="100000">
-                                                                    <input type="number" class="form-control" readonly="true" id="" value="0" max="175">
+                                                                     @Html.TextBox("QuantityPerUnit",1,new{@type="number"})
                                                                     <span class="btn-substract" data-id="243" for="tickets-243">&nbsp;</span>
                                                                     <span class="btn-add" data-id="243" for="tickets-243">&nbsp;</span>
                                                                 </div>
@@ -145,4 +247,4 @@
         </div>
     </div>
 </div>
-}
+}*@

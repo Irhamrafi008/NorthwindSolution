@@ -11,6 +11,9 @@ namespace NorthwindServicesAbstraction
     {
         Task<IEnumerable<OrdersDto>> GetAllOrders(bool trackChanges);
         Task<OrdersDto>GetAllOrderById(int orderId, bool trackChanges);
+        Task<OrdersDto>GetOrderById(int orderId, bool trackChanges);
+        Task<OrdersDto>FilterCustId(string custId, bool trackChanges);
+        OrdersDto createOrderId(OrdersForCreateDto ordersForCreateDto);
         void Insert(OrdersForCreateDto ordersForCreateDto);
         void Edit(OrdersDto ordersDto);
         void Remove(OrdersDto ordersDto);

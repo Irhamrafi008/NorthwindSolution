@@ -1,13 +1,17 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Northwind.Domain.Configuration;
+using Northwind.Domain.Dto;
 using Northwind.Domain.Models;
 
 #nullable disable
 
 namespace Northwind.Persistence
 {
-    public partial class NorthwindContext : DbContext
+    public partial class NorthwindContext : IdentityDbContext<User>
     {
         public NorthwindContext()
         {
@@ -51,6 +55,8 @@ namespace Northwind.Persistence
         public virtual DbSet<ProductPhoto> ProductPhotos { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
 
+        public virtual DbSet<TotalproductByCategory> TotalProductByCategorySQL { get; set; }
+
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
 //            if (!optionsBuilder.IsConfigured)
@@ -62,7 +68,19 @@ namespace Northwind.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //add
+            base.OnModelCreating(modelBuilder);
+
+            //apply Role Configuration
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<TotalproductByCategory>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("TotalProductByCategorySQL");
+            });
 
             modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
             {

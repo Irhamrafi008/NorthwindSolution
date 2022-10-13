@@ -56,5 +56,28 @@ namespace NorthwindServices
             _repositoryManager.OrdersRepository.Remove(ordersMdl);
             _repositoryManager.save();
         }
+
+        public async Task<OrdersDto> FilterCustId(string custId, bool trackChanges)
+        {
+            var orderMdl = await _repositoryManager.OrdersRepository.FilterCustId(custId, trackChanges);
+            var orderDto = _mapper.Map<OrdersDto>(orderMdl);
+            return orderDto;
+        }
+
+        public OrdersDto createOrderId(OrdersForCreateDto ordersForCreateDto)
+        {
+            var orderMdl = _mapper.Map<Order>(ordersForCreateDto);
+            _repositoryManager.OrdersRepository.Insert(orderMdl);
+            _repositoryManager.save();
+            var orderDto = _mapper.Map<OrdersDto>(orderMdl);
+            return orderDto;
+        }
+
+        public async Task<OrdersDto> GetOrderById(int orderId, bool trackChanges)
+        {
+            var orderMdl = await _repositoryManager.OrdersRepository.GetOrderById(orderId, trackChanges);
+            var orderDto = _mapper.Map<OrdersDto>(orderMdl);
+            return orderDto;
+        }
     }
 }

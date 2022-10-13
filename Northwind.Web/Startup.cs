@@ -2,14 +2,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Northwind.Domain.Base;
+using Northwind.Domain.Models;
 using Northwind.Persistence;
 using Northwind.Persistence.Base;
+using Northwind.Web.Extensions;
+using Northwind.Web.Factory;
 using Northwind.Web.Repository;
 using NorthwindServices;
 using NorthwindServicesAbstraction;
@@ -33,6 +37,8 @@ namespace Northwind.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
+
             services.AddControllersWithViews();
             //call interface & Implementation
             services.AddScoped<IEmployee, EmployeeRepository>();
@@ -47,6 +53,12 @@ namespace Northwind.Web
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:NorthwindDb"]);
             });
+
+            //add configureIdentity here from ServiceExtensions
+            services.ConfigureIndentity();
+            /*services.ConfigureApplicationCookie(o => o.LoginPath = "/Authentication/Login");*/
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +86,8 @@ namespace Northwind.Web
 
             app.UseRouting();
 
+            //call Authentications
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -82,6 +96,11 @@ namespace Northwind.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            
+
+
+
 
            // ShopeePopulateData.PopulateData(app);
 

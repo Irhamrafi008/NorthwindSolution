@@ -27,6 +27,6 @@ namespace Northwind.Contracts.Dto.Order
         /*public virtual Customer Customer { get; set; }*/
         /*public virtual EmployeeDto EmployeeDto { get; set; }*/
         /*public virtual Shipper ShipViaNavigation { get; set; }*/
-        public virtual ICollection<OrderDetailsDto> OrderDetailsDto { get; set; }
+        public virtual ICollection<OrderDetailsDto> OrderDetails { get; set; }
     }
 }
